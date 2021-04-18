@@ -14,4 +14,14 @@ class Player:
             self.name = get_name()
             self.passwd = get_passwd()
 
-    def
+    def change_name(self):
+        self.name = get_name()
+
+    def change_password(self):
+        pass
+
+    def draw(self, deck):
+        self.hand.add_card(deck.draw())
+
+    def clear_hand(self):
+        self.hand.clear()
