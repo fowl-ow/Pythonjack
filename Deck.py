@@ -7,7 +7,7 @@ class Deck:
     deck = []
     card = Card("Ace", "Spades")
 
-    def __init__(self,):
+    def __init__(self):
          self.create()
 
     def create(self):
@@ -23,7 +23,7 @@ class Deck:
         list.clear(self.deck)
 
     def draw(self):
-        if len(deck) == 0:
+        if len(self.deck) == 0:
             self.create()
         card = self.deck[0]
         self.deck.pop(0)

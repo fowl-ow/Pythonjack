@@ -1,4 +1,5 @@
-from . import Card, Deck
+from Card import Card
+from Deck import Deck
 
 
 class Hand:
@@ -23,4 +24,4 @@ class Hand:
         self.update_value()
 
     def clear(self):
-        list.clear(self.deck)
+        list.clear(self.hand)

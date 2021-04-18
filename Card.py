@@ -36,5 +36,5 @@ class Card:
             self.suit = suit
             self.value = self.rank_list[rank]
 
-    def to_string(self):
+    def __str__(self):
         return str(self.rank + " of " + self.suit)
