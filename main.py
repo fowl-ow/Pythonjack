@@ -6,9 +6,10 @@ from Player import Player
 from Interactor import *
 
 def main():
-    game = Blackjack()
-    game.login()
-
+    # game = Blackjack()
+    # game.login()
+    int = Interactor()
+    int.sefes()
 
 if __name__ == '__main__':
     main()
