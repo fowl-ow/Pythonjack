@@ -9,10 +9,10 @@ class Player:
     passwd = ""
     hand = Hand()
 
-    def __init__(self, create=True):
+    def __init__(self, name, passwd, create=True):
         if create:
-            self.name = get_name()
-            self.passwd = get_passwd()
+            self.name = name
+            self.passwd = passwd
 
     def change_name(self):
         self.name = get_name()
