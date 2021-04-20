@@ -31,9 +31,10 @@ class Blackjack:
                 self.inter.check_exit("exit")
 
     def login(self):
-        for i in range(3)
+        for i in range(3):
             name = self.inter.get_name(just_check=True)
-            if not self.db.create_user(True)
+            if not self.db.create_user(True):
+                pass
 
 
     def create_user(self):
