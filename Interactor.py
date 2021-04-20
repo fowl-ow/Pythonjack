@@ -3,22 +3,24 @@ import re
 from yes_no import yes, no
 from getpass import getpass
 from passlib.hash import bcrypt
-
+from Database import Database
 
 class Interactor:
 
-    def get_name(self):
-        while True:
-            name = str.capitalize(self.get_input("Please enter your name:\n"))
+    def get_name(self, just_check=False):
+        for i in range(5):
+            name = str.capitalize(self.get_input("Please enter a name:\n"))
             self.check_exit(name)
             if not (re.match('^\w+$', name) and 2 < len(name) < 13):
-                print(
-                    "Your name may only contain Alphanumeric characters,\nand must be between 3 and 12 characters long.")
-            else:
+                if not just_check:
+                    print("Your name may only contain alphanumeric characters,\nand must be between 3 and 12 characters long.")
+            if not just_check:
                 if self.get_decision("Are you happy with: {}?".format(name)):
                     return name
+        print("You've been sent back due to failing 5 times.")
+        return
 
-    def get_input(self, text):
+    def get_input(self, text=""):
         return self.check_exit(input(text))
 
     def check_exit(self, str):
@@ -46,15 +48,13 @@ class Interactor:
             else:
                 return int(string)
 
-    def set_passwd(self, username):
+    def get_passwd(self, username):
         for i in range(9):
             print("Please enter a strong password.")
             hash = bcrypt.hash((getpass()))
             print("Please confirm your password.")
-            if print(bcrypt.verify(getpass(), hash)):
-                with open("data.json", "w") as writefile:
-                    json.dump(dictionary, writefile)
-
+            if bcrypt.verify(getpass(), hash):
+                return hash
             else:
                 print("Mismatch.")
         print("Failed 9 times, I give up.")
@@ -63,8 +63,8 @@ class Interactor:
     def verify_passwd(self, username):
         pass
 
-    def menu(self, items):
-        items.insert(0, "Back")
+    def menu(self, items, back=True):
+        if back: items.insert(0, "Back")
         for count, item in enumerate(items):
             print("[{}] {}".format(count, item))
         selection = self.menu_choose(len(items))
@@ -78,11 +78,3 @@ class Interactor:
                 return choice
             else:
                 print("You may only enter integers in the range of options.")
-
-    def sefes(self):
-        with open("data.json", "r+") as f:
-            dictionaries = json.load(f)
-            for dic in dictionaries:
-                print(dic.get("uid"))
-            f.seek(0)
-            json.dump(dictionaries, f, indent=4)
