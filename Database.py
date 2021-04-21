@@ -16,16 +16,23 @@ class Database:
                     passwd TEXT
                     );''')
 
-    def create_user(self, username, just_check_if_exists=False):
+    def create_user(self, username):
         con, cur = self.connect()
         try:
             cur.execute('INSERT INTO users (uname) VALUES (?)', [username])
             con.commit()
         except:
             return False
-        if just_check_if_exists:
-            self.delete_user(username)
         return True
+
+    def user_exists(self, username):
+        con, cur = self.connect()
+        cur.execute('SELECT uname FROM users WHERE uname = ?', [username])
+        result = cur.fetchall()
+        if len(result) == 0:
+            return False
+        else:
+            return True
 
     def delete_user(self, username):
         con, cur = self.connect()
@@ -46,27 +53,12 @@ class Database:
     def get_user_passwd(self, username):
         con, cur = self.connect()
         cur.execute('SELECT passwd FROM users WHERE uname = ?', [username])
-        return cur.fetchone()
+        try:
+            return "".join(cur.fetchone())
+        except:
+            return False
 
     def get_all(self):
         con, cur = self.connect()
         cur.execute('SELECT * FROM users')
         return cur.fetchall()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

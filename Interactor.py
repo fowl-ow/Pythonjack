@@ -20,6 +20,9 @@ class Interactor:
         print("You've been sent back due to failing 5 times.")
         return
 
+
+
+
     def get_input(self, text=""):
         return self.check_exit(input(text))
 
