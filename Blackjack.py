@@ -7,6 +7,7 @@ from Database import Database
 from forbidden_names import names
 import getpass
 
+
 class Blackjack:
     deck = Deck()
     dealer = Dealer()
