@@ -18,6 +18,7 @@ class Database:
 
     def create_user(self, username):
         con, cur = self.connect()
+        # noinspection PyBroadException
         try:
             cur.execute('INSERT INTO users (uname) VALUES (?)', [username])
             con.commit()
