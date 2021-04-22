@@ -16,8 +16,10 @@ class Hand:
             return
         for card in self.hand:
             self.value += card.value
-            if card.rank == "Ace": ace = True
-        if self.value >= 11: self.value += 10
+            if card.rank == "Ace":
+                ace = True
+        if self.value <= 11 and ace:
+            self.value += 10
 
     def add_card(self, card):
         self.hand.append(card)
